@@ -1,0 +1,236 @@
+body {
+  background: linear-gradient(135deg, #74ebd5, #acb6e5, #d4a5f9);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml,%3Csvg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23ffffff" fill-opacity="0.1" fill-rule="evenodd"%3E%3Cpath d="M0 40L40 0H20L0 20z"/%3E%3Cpath d="M40 40L0 0v20L40 40z"/%3E%3C/g%3E%3C/svg%3E');
+  z-index: -1;
+}
+
+.navbar {
+  background: linear-gradient(45deg, #007bff, #00d4ff);
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+  padding: 15px 0;
+  transition: all 0.3s ease;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: #fff !important;
+}
+
+.navbar-nav .nav-link {
+  color: white !important;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 10px 15px;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #ffd700 !important;
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
+
+.container {
+  max-width: 1100px;
+  margin-top: 40px;
+  animation: fadeIn 1s ease-in;
+}
+
+h2 {
+  font-weight: 600;
+  color: #333;
+  position: relative;
+  display: inline-block;
+}
+
+h2::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 50%;
+  height: 3px;
+  background: linear-gradient(45deg, #007bff, #00d4ff);
+  border-radius: 3px;
+}
+
+.card {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(5px);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 123, 255, 0.2);
+}
+
+.table {
+  background: transparent;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+.table th {
+  background: linear-gradient(45deg, #007bff, #00d4ff);
+  color: white;
+  border: none;
+  padding: 15px;
+  font-weight: 600;
+}
+
+.table td {
+  vertical-align: middle;
+  border: none;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+}
+
+.table tr:hover td {
+  background: rgba(0, 123, 255, 0.1);
+}
+
+.table .text-success {
+  font-weight: 500;
+  color: #28a745 !important;
+}
+
+.table .text-warning {
+  font-weight: 500;
+  color: #ffca2c !important;
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, #007bff, #00d4ff);
+  border: none;
+  border-radius: 25px;
+  padding: 10px 25px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(45deg, #0056b3, #0096cc);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+}
+
+.btn-info {
+  background: linear-gradient(45deg, #17a2b8, #3ec7e0);
+  border: none;
+  border-radius: 20px;
+  padding: 8px 20px;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-info:hover {
+  background: linear-gradient(45deg, #117a8b, #2ba7c2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(23, 162, 184, 0.4);
+}
+
+.form-control {
+  border-radius: 10px;
+  border: 1px solid #ced4da;
+  transition: all 0.3s ease;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+}
+
+.input-group-text {
+  border-radius: 10px 0 0 10px;
+  border: none;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #444;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.footer {
+  background: linear-gradient(45deg, #333, #555);
+  color: white;
+  padding: 25px 0;
+  margin-top: 50px;
+  text-align: center;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.footer p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.footer a {
+  color: #ffd700;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.footer a:hover {
+  color: #ffffff;
+  transform: scale(1.2);
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding: 15px;
+  }
+
+  .table {
+    font-size: 14px;
+  }
+
+  .card {
+    margin-bottom: 20px;
+  }
+
+  .navbar-brand {
+    font-size: 1.3rem;
+  }
+
+  .navbar-nav .nav-link {
+    padding: 8px 10px;
+  }
+}
