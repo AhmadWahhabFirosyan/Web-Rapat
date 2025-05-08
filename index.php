@@ -7,6 +7,31 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
+
+// Ambil department dan role pengguna
+$user = mysqli_fetch_assoc(mysqli_query($conn, "SELECT role, department FROM users WHERE id = " . $_SESSION['user_id']));
+$user_role = $user['role'];
+$user_department = $user['department'];
+
+// Query untuk filter dan pencarian
+$filter_date = isset($_GET['filter_date']) ? $_GET['filter_date'] : '';
+$filter_status = isset($_GET['filter_status']) ? $_GET['filter_status'] : '';
+$search_theme = isset($_GET['search_theme']) ? mysqli_real_escape_string($conn, $_GET['search_theme']) : '';
+$query = "SELECT * FROM meetings WHERE 1=1";
+if ($user_role == 'Peserta') {
+    $query .= " AND department = '$user_department'";
+}
+if ($filter_date) {
+    $query .= " AND DATE(meeting_date) = '$filter_date'";
+}
+if ($filter_status) {
+    $query .= " AND status = '$filter_status'";
+}
+if ($search_theme) {
+    $query .= " AND theme LIKE '%$search_theme%'";
+}
+$query .= " ORDER BY meeting_date DESC";
+$result = mysqli_query($conn, $query);
 ?>
 
 <!DOCTYPE html>
@@ -18,15 +43,6 @@ if (!isset($_SESSION['user_id'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Fallback jika CDN gagal */
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .navbar {
-            background: #007bff;
-        }
-    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -38,14 +54,15 @@ if (!isset($_SESSION['user_id'])) {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <div class="navbar-nav ms-auto">
                     <a class="nav-link" href="add_meeting.php"><i class="fas fa-plus me-1"></i>Tambah Rapat</a>
-                    <a class="nav-link" href="logout.php"><i class="fas fa-sign-out-alt me-1"></i>Logout (<?php echo htmlspecialchars($_SESSION['username']); ?>)</a>
+                    <span class="nav-link disabled">Role: <?php echo htmlspecialchars($user_role); ?></span>
+                    <a class="nav-link" href="logout.php"><i class="fas fa-sign-out-alt me-1"></i>Logout (<?php echo htmlspecialchars($_SESSION['user_id']); ?>)</a>
                 </div>
             </div>
         </div>
     </nav>
 
     <div class="container">
-        <h2 class="my-4 text-center"><i class="fas fa-list me-2 text-primary"></i>Daftar Rapat</h2>
+        <h2 class="my-4 text-center"><i class="fas fa-list me-2 text-primary"></i>Daftar Rapat (Bidang: <?php echo htmlspecialchars($user_department); ?>)</h2>
         <div class="card p-4 mb-4">
             <form method="GET">
                 <div class="row g-3 align-items-center">
@@ -54,6 +71,16 @@ if (!isset($_SESSION['user_id'])) {
                             <span class="input-group-text bg-primary text-white"><i class="fas fa-calendar-day"></i></span>
                             <input type="date" name="filter_date" class="form-control" value="<?php echo isset($_GET['filter_date']) ? $_GET['filter_date'] : ''; ?>">
                         </div>
+                    </div>
+                    <div class="col-md-3">
+                        <select name="filter_status" class="form-control">
+                            <option value="">Semua Status</option>
+                            <option value="Online" <?php echo isset($_GET['filter_status']) && $_GET['filter_status'] == 'Online' ? 'selected' : ''; ?>>Online</option>
+                            <option value="Offline" <?php echo isset($_GET['filter_status']) && $_GET['filter_status'] == 'Offline' ? 'selected' : ''; ?>>Offline</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" name="search_theme" class="form-control" placeholder="Cari berdasarkan tema..." value="<?php echo isset($_GET['search_theme']) ? $_GET['search_theme'] : ''; ?>">
                     </div>
                     <div class="col-md-2">
                         <button type="submit" class="btn btn-primary w-100"><i class="fas fa-filter me-1"></i>Filter</button>
@@ -76,14 +103,6 @@ if (!isset($_SESSION['user_id'])) {
                     </thead>
                     <tbody>
                         <?php
-                        $filter_date = isset($_GET['filter_date']) ? $_GET['filter_date'] : '';
-                        $query = "SELECT * FROM meetings";
-                        if ($filter_date) {
-                            $query .= " WHERE DATE(meeting_date) = '$filter_date'";
-                        }
-                        $query .= " ORDER BY meeting_date DESC";
-                        $result = mysqli_query($conn, $query);
-
                         while ($row = mysqli_fetch_assoc($result)) {
                             $status_class = $row['status'] == 'Online' ? 'text-success' : 'text-warning';
                             echo "<tr>";

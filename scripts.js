@@ -2,6 +2,7 @@ function validateForm() {
   const theme = document.getElementById("theme").value;
   const meetingDate = document.getElementById("meeting_date").value;
   const meetingTime = document.getElementById("meeting_time").value;
+  const leader = document.getElementById("leader").value;
   const attendees = document.getElementById("attendees").value;
   const notes = document.getElementById("notes").value;
 
@@ -17,6 +18,11 @@ function validateForm() {
 
   if (!meetingTime) {
     alert("Waktu rapat harus diisi.");
+    return false;
+  }
+
+  if (!leader || leader.length < 2) {
+    alert("Pimpinan rapat harus diisi dan minimal 2 karakter.");
     return false;
   }
 
@@ -37,6 +43,7 @@ function validateRegisterForm() {
   const username = document.getElementById("username").value;
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
+  const department = document.getElementById("department").value;
 
   if (!username || username.length < 3) {
     alert("Username harus diisi dan minimal 3 karakter.");
@@ -50,6 +57,11 @@ function validateRegisterForm() {
 
   if (!password || password.length < 6) {
     alert("Password harus diisi dan minimal 6 karakter.");
+    return false;
+  }
+
+  if (!department) {
+    alert("Bidang harus dipilih.");
     return false;
   }
 

@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
+            $_SESSION['role'] = $user['role'];
             header("Location: index.php");
             exit();
         } else {
@@ -36,28 +37,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
     <div class="container">
-        <h2 class="my-4"><i class="fas fa-sign-in-alt me-2"></i>Login</h2>
-        <div class="card p-4">
-            <?php if (isset($error)) echo "<div class='alert alert-danger'><i class='fas fa-exclamation-triangle me-2'></i>$error</div>"; ?>
-            <?php if (isset($_GET['success'])) echo "<div class='alert alert-success'><i class='fas fa-check-circle me-2'></i>{$_GET['success']}</div>"; ?>
-            <form id="loginForm" method="POST" onsubmit="return validateLoginForm()">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" required>
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 form-container">
+                <h2 class="my-4 text-center"><i class="fas fa-sign-in-alt me-2"></i>Login</h2>
+                <div class="card p-4">
+                    <?php if (isset($error)) echo "<div class='alert alert-danger'><i class='fas fa-exclamation-triangle me-2'></i>$error</div>"; ?>
+                    <?php if (isset($_GET['success'])) echo "<div class='alert alert-success'><i class='fas fa-check-circle me-2'></i>{$_GET['success']}</div>"; ?>
+                    <form id="loginForm" method="POST" onsubmit="return validateLoginForm()">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100"><i class="fas fa-sign-in-alt me-1"></i>Login</button>
+                        <p class="mt-3 text-center">Belum punya akun? <a href="register.php">Daftar di sini</a></p>
+                    </form>
                 </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
-                </div>
-                <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt me-1"></i>Login</button>
-                <p class="mt-3">Belum punya akun? <a href="register.php">Daftar di sini</a></p>
-            </form>
+            </div>
         </div>
     </div>
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Manajemen Rapat. All rights reserved.</p>
+            <p>© 2025 Manajemen Rapat. All rights reserved.</p>
             <div>
                 <a href="#"><i class="fab fa-twitter"></i></a>
                 <a href="#"><i class="fab fa-linkedin"></i></a>

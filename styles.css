@@ -150,6 +150,21 @@ h2::after {
   box-shadow: 0 4px 15px rgba(23, 162, 184, 0.4);
 }
 
+.btn-success {
+  background: linear-gradient(45deg, #28a745, #34d058);
+  border: none;
+  border-radius: 20px;
+  padding: 8px 20px;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+  background: linear-gradient(45deg, #1e7e34, #28a745);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+}
+
 .form-control {
   border-radius: 10px;
   border: 1px solid #ced4da;
@@ -171,6 +186,31 @@ h2::after {
 .form-label {
   font-weight: 500;
   color: #444;
+}
+
+.custom-file-input {
+  display: none;
+}
+
+.custom-file-label {
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.custom-file-label:hover {
+  background: rgba(0, 123, 255, 0.1);
+}
+
+#calendar {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
 @keyframes fadeIn {
@@ -213,9 +253,9 @@ h2::after {
   transform: scale(1.2);
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .container {
-    padding: 15px;
+    padding: 10px;
   }
 
   .table {
@@ -223,7 +263,7 @@ h2::after {
   }
 
   .card {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 
   .navbar-brand {
@@ -232,5 +272,25 @@ h2::after {
 
   .navbar-nav .nav-link {
     padding: 8px 10px;
+  }
+
+  .form-container {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  #calendar {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 8px 15px;
   }
 }
